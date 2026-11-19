@@ -1,0 +1,23 @@
+{
+  "name": "لياقتي 30 – تحدي حرق دهون البطن",
+  "short_name": "لياقتي 30",
+  "description": "خطة 30 يوماً منزلية للمبتدئين لحرق دهون البطن: تمارين، تغذية، وتتبع التقدم – تعمل بدون إنترنت.",
+  "lang": "ar",
+  "dir": "rtl",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0e13",
+  "theme_color": "#0a0e13",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "تمرين اليوم", "short_name": "تمرين", "url": "./index.html" }
+  ]
+}

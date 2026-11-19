@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0e13">
+  <meta name="description" content="تحدي 30 يوماً لحرق دهون البطن: تمارين منزلية للمبتدئين، تغذية، وتتبع التقدم.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>لياقتي 30 – تحدي حرق دهون البطن</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="icons/icon-192.png" alt="" class="brand-logo">
+        <div>
+          <h1 id="pageTitle">الرئيسية</h1>
+          <small id="pageSub">تحدي 30 يوماً لحرق دهون البطن</small>
+        </div>
+      </div>
+      <button class="install-chip" id="installTop" data-act="install" hidden>تثبيت</button>
+    </header>
+
+    <main id="views">
+      <section class="view active" id="view-home" aria-label="الرئيسية"></section>
+      <section class="view" id="view-plan" aria-label="الخطة"></section>
+      <section class="view" id="view-nutrition" aria-label="التغذية"></section>
+      <section class="view" id="view-progress" aria-label="التقدم"></section>
+      <section class="view" id="view-settings" aria-label="الإعدادات"></section>
+    </main>
+
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="nav-btn active" data-act="nav" data-view="home">
+        <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
+        <span>الرئيسية</span>
+      </button>
+      <button class="nav-btn" data-act="nav" data-view="plan">
+        <svg viewBox="0 0 24 24"><path d="M6 7v10M18 7v10M3 9.5v5M21 9.5v5M6 12h12"/></svg>
+        <span>التمارين</span>
+      </button>
+      <button class="nav-btn" data-act="nav" data-view="nutrition">
+        <svg viewBox="0 0 24 24"><path d="M7 3v8a2 2 0 0 0 4 0V3M9 13v8"/><path d="M17 21V3c-2 1.5-3 4-3 7s1 4 3 4"/></svg>
+        <span>التغذية</span>
+      </button>
+      <button class="nav-btn" data-act="nav" data-view="progress">
+        <svg viewBox="0 0 24 24"><path d="M3 20h18M7 16v-4M12 16V6M17 16v-7"/></svg>
+        <span>التقدم</span>
+      </button>
+      <button class="nav-btn" data-act="nav" data-view="settings">
+        <svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        <span>الإعدادات</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- مشغل التمرين -->
+  <div id="player" class="player" hidden>
+    <div class="pl-top">
+      <button class="icon-btn" data-act="pl-close" aria-label="إغلاق">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div class="pl-head">
+        <div id="plPhase" class="pl-phase">الإحماء</div>
+        <div id="plCount" class="pl-count">1 / 26</div>
+      </div>
+      <button class="icon-btn" id="plSoundBtn" data-act="pl-sound" aria-label="الصوت"></button>
+    </div>
+    <div class="pl-progress"><div id="plBar"></div></div>
+
+    <div id="plMain" class="pl-main">
+      <div id="plFigure" class="pl-figure"></div>
+      <div class="pl-names">
+        <div id="plKindTag" class="pl-kind-tag">تمرين</div>
+        <h2 id="plNameAr">—</h2>
+        <div id="plNameEn" class="en">—</div>
+      </div>
+
+      <div class="pl-timer">
+        <svg viewBox="0 0 120 120">
+          <circle class="ring-track" cx="60" cy="60" r="54"/>
+          <circle id="plRing" class="ring" cx="60" cy="60" r="54"/>
+        </svg>
+        <div class="pl-time">
+          <span id="plTime">00:00</span>
+          <small id="plSub">ثانية</small>
+        </div>
+      </div>
+
+      <div id="plNext" class="pl-next"></div>
+
+      <div class="pl-controls" dir="ltr">
+        <button class="ctrl" data-act="pl-prev" aria-label="السابق">
+          <svg viewBox="0 0 24 24"><path d="M19 5 9 12l10 7z" class="fill"/><path d="M5 5v14"/></svg>
+        </button>
+        <button class="ctrl" data-act="pl-restart" aria-label="إعادة التمرين">
+          <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        </button>
+        <button class="ctrl main" id="plPlayBtn" data-act="pl-play" aria-label="تشغيل/إيقاف مؤقت"></button>
+        <button class="ctrl" data-act="pl-next" aria-label="تخطي">
+          <svg viewBox="0 0 24 24"><path d="M5 5l10 7-10 7z" class="fill"/><path d="M19 5v14"/></svg>
+        </button>
+      </div>
+
+      <div class="pl-actions">
+        <button class="btn ghost" data-act="pl-how">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          طريقة الأداء
+        </button>
+        <a id="plYt" class="btn yt" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z" class="fill"/></svg>
+          شاهد الطريقة على يوتيوب
+        </a>
+      </div>
+      <div id="plHow" class="pl-how" hidden></div>
+    </div>
+
+    <div id="plDone" class="pl-done" hidden></div>
+  </div>
+
+  <!-- نافذة سفلية (Bottom Sheet) -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop" data-act="modal-close"></div>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <button class="icon-btn sheet-close" data-act="modal-close" aria-label="إغلاق">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div id="modalBody" class="sheet-body"></div>
+    </div>
+  </div>
+
+  <input type="file" id="importFile" accept="application/json,.json" hidden>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
